@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@arco-design/web-vue": "^2.56.2",
     "@types/mockjs": "^1.0.10",
     "axios": "^1.7.7",
     "mockjs": "^1.1.0",

@@ -1,22 +1,88 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'web',
+      component: () => import('../views/web/web.vue'),
+      children: [
+        {
+          path: "",
+          name: "index",
+          component: () => import('../views/web/web.vue'),
+        }
+      ]
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: "/admin",
+      name: "admin",
+      component: () => import('../views/admin/index.vue'),
+      children: [
+        {
+          path: "",
+          name: "home",
+          component: () => import('../views/admin/home/index.vue'),
+        },
+        {
+          path: "article",
+          name: "article",
+          children: [
+            {
+              path: "article_list",
+              name: "article_list",
+              component: () => import('../views/admin/article/article_list.vue'),
+            }
+          ]
+        },
+        {
+          path: "chat_group",
+          name: "chat_group",
+          children: [
+            {
+              path: "chat_list",
+              name: "chat_list",
+              component: () => import('../views/admin/chat_group/chat_list.vue'),
+            }
+          ]
+        },
+        {
+          path: "system",
+          name: "system",
+          children: [
+            {
+              path: "menu_list",
+              name: "menu_list",
+              component: () => import('../views/admin/system/menu_list.vue'),
+            }
+          ]
+        },
+        {
+          path: "user_center",
+          name: "user_center",
+          children: [
+            {
+              path: "user_info",
+              name: "user_info",
+              component: () => import('../views/admin/user_center/user_info.vue'),
+            }
+          ]
+        },
+        {
+          path: "users",
+          name: "users",
+          children: [
+            {
+              path: "user_list",
+              name: "user_list",
+              component: () => import('../views/admin/users/user_list.vue'),
+            }
+          ]
+        },
+      ]
     }
+
   ]
 })
 
